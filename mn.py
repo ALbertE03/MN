@@ -7,6 +7,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 import matplotlib.pyplot as plt
 import time
+import seaborn as sns
 
 from scipy import linalg
 from sklearn.decomposition import TruncatedSVD
