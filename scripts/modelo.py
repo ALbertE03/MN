@@ -61,7 +61,7 @@ def modelo(df1, df, n):
 
     if st.checkbox("Errores"):
         st.text("Error medio absoluto: " + str(mean_absolute))
-        st.text("Eror medio cuadrado: " + str(mean_squared))
+        st.text("Error medio cuadrado: " + str(mean_squared))
         st.text("r2_score: " + str(r2))
 
     if st.checkbox("Visualizar"):
