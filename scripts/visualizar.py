@@ -37,23 +37,19 @@ def visualizar(predict, orig):
             "cantidad de tumores benignos predichos": cant_unos_p,
             "cantidad de tumores malignos predichos": cant_zeros_p,
         },
-        index=[0],
+        index=["Predicciones"],
     )
     df_orig = pd.DataFrame(
         {
             "cantidad de tumores benignos originales": cant_unos,
             "cantidad de tumores malignos origiales": cant_zeros,
         },
-        index=[0],
+        index=["Originales"],
     )
     fig = px.bar(df_predict)
-    fig.update_layout(
-        title="Predicciones", yaxis_title="valor", xaxis_title="Predicciones"
-    )
+    fig.update_layout(title="Predicciones", yaxis_title="valor")
     fig1 = px.bar(df_orig)
-    fig1.update_layout(
-        title="Originales", yaxis_title="valor", xaxis_title="Originales"
-    )
+    fig1.update_layout(title="Originales", yaxis_title="valor")
 
     st.plotly_chart(fig, use_container_width=True)
     st.plotly_chart(fig1, use_container_width=True)
