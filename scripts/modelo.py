@@ -47,15 +47,17 @@ def modelo(df1, df, n):
         aux += str(i)
         aux += " "
     aux += "]"
-
-    stoggle(
-        "Originales: ",
-        aux,
-    )
-    stoggle(
-        "Predicciones: ",
-        str(a),
-    )
+    col1, col2 = st.columns(2)
+    with col1:
+        stoggle(
+            "Originales: ",
+            aux,
+        )
+    with col2:
+        stoggle(
+            "Predicciones: ",
+            str(a),
+        )
     if st.checkbox("Reportes"):
         st.text(report)
 
