@@ -6,7 +6,6 @@ import io
 import plotly.express as px
 import plotly.graph_objects as go
 import matplotlib.pyplot as plt
-import time
 import seaborn as sns
 
 from scipy import linalg
@@ -25,7 +24,7 @@ from sklearn.metrics import (
 
 # locales
 from scripts.autores import autores
-from scripts.modelo import modelo
+from scripts.modelo import modelo, modelo_sin_svd
 
 st.set_page_config(layout="wide")
 
@@ -54,7 +53,7 @@ import matplotlib.pyplot as plt
 from sklearn.decomposition import TruncatedSVD
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import classification_report,mean_squared_error,r2_score,mean_absolute_error,
+from sklearn.metrics import classification_report,mean_squared_error,r2_score,mean_absolute_error,confusion_matrix,ConfusionMatrixDisplay
 
 df = pd.read_csv(" breast-cancer.csv.xls",index_col=0)
 print(df)""",
@@ -157,7 +156,7 @@ fig.update_layout(
         yaxis_title="valor",
         xaxis=dict(tickmode="linear"),
 )
-# en la grafica se observa que los 4 primeros valores singulares son los mas significativos.
+# en la grafica se observa que los 4 primeros valores singulares son los más significativos.
     """,
             line_numbers=True,
         )
@@ -171,8 +170,45 @@ fig.update_layout(
             xaxis=dict(tickmode="linear"),
         )
         st.plotly_chart(fig)
+        with st.expander("Regresión logistica sin SVD truncado"):
+            st.markdown(
+                """<h1 class = 'model'>Modelo de Regresión Logística</h1> <style>
+                .model{
+                font-size: 30px;
+                text-align: center;
+                }
+            </style>""",
+                unsafe_allow_html=True,
+            )
+            st.code(
+                f"""
+    X = df1
+    # se llevó los benignos a 1 y los malignos a 0
+    # para hacer la clasificación binaria
+    y = (df['diagnosis'] == 'B').astype(int)
+
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2,random_state=0)
+
+    model = LogisticRegression()
+    model.fit(X_train, y_train)
+
+    a=model.predict(X)
+    predict = model.predict(X_test)
+    cm = confusion_matrix(y_test, predict)
+    report = classification_report(y_test, predict)
+    r2 = r2_score(y_test, predict)
+    mean_absolute = mean_absolute_error(y_test, predict)
+    mean_squared = mean_squared_error(y_test, predict)
+
+    print(model.score(X_test,y_test))
+    print(a)""",
+                line_numbers=True,
+            )
+            modelo_sin_svd(df1, df)
+
         st.markdown(
-            """<h1 class = 'model'>Modelo de Regresión Logística</h1> <style>
+            """<h1 class = 'model'>Modelo de Regresión Logística con SVD truncado</h1> <style>
                 .model{
                 font-size: 30px;
                 text-align: center;
@@ -206,6 +242,7 @@ fig.update_layout(
 
     a=model.predict(X_reduced)
     predict = model.predict(X_test)
+    cm = confusion_matrix(y_test, predict)
     report = classification_report(y_test, predict)
     r2 = r2_score(y_test, predict)
     mean_absolute = mean_absolute_error(y_test, predict)
@@ -232,10 +269,4 @@ if __name__ == "__main__":
 
     if check:
         with st.spinner():
-            time.sleep(1)
-            st.warning("Cargando..")
-            time.sleep(1)
-            st.warning("Sigue cargando....")
-            time.sleep(1)
-            st.warning("Estamos por acá ⬇︎")
             autores()
