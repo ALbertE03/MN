@@ -231,7 +231,7 @@ fig.update_layout(
 
     # entonces se obtienen mejores resultados con n_components = 2,3 
     # nos decidimos por n_components = 2, ya que esto implicaria menor coste computacional(Menos columnas)
-    # y obtendriamos mismos resultados.
+    # y obtendriamos los mismos resultados.
     svd = TruncatedSVD(n_components=2)
     X_reduced = svd.fit_transform(X)
 
@@ -268,5 +268,4 @@ if __name__ == "__main__":
     check = st.button("¿Quiénes somos?")
 
     if check:
-        with st.spinner():
-            autores()
+        autores()
