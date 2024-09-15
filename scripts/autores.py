@@ -3,7 +3,7 @@ import streamlit as st
 
 def autores():
     st.markdown(
-        """<h1 class = 'uni'>Universidad de la Habana🏛️</h1> <style>
+        """<h1 class = 'uni'>Universidad de la Habana 🏛️</h1> <style>
                 .uni{
                 font-size: 60px;
                 text-align: center;
@@ -12,7 +12,7 @@ def autores():
         unsafe_allow_html=True,
     )
     st.markdown(
-        """<h2 class = 'facu'>Facultad: MATCOM👨‍💻 </h2> <style>
+        """<h2 class = 'facu'>Facultad: MATCOM 👨‍💻 </h2> <style>
                 .facu{
                 font-size: 45px;
                 text-align: center;

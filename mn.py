@@ -43,6 +43,15 @@ def inicio():
             </style>""",
             unsafe_allow_html=True,
         )
+        st.markdown(
+            """<h1 class = 'titulos1'>Breast cancer</h1> <style>
+                .titulos1{
+                font-size: 40px;
+                text-align: center;
+                }
+            </style>""",
+            unsafe_allow_html=True,
+        )
         st.code(
             """
 import pandas as pd
@@ -265,7 +274,4 @@ fig.update_layout(
 
 if __name__ == "__main__":
     inicio()
-    check = st.button("¿Quiénes somos?")
-
-    if check:
-        autores()
+    autores()
