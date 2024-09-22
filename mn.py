@@ -155,9 +155,20 @@ print(sigma_s)""",
             unsafe_allow_html=True,
         )
         st.code(
-            """fig = go.Figure()
+            """def varianza(sigma_s):
+    result = []
+
+    for i in sigma_s:
+        if len(result) == 0:
+            result.append(i)
+            continue
+        result.append(i + result[-1])
+    return result
+
+suma1 = varianza(sigma_s)
+fig = go.Figure()
 fig.add_trace(go.Scatter(x=list(range(1, 31)), 
-                         y=sigma_s,
+                         y=suma1,
                          mode="lines+markers"))
 fig.update_layout(
         title="valores sigulares",
@@ -170,8 +181,20 @@ fig.update_layout(
             line_numbers=True,
         )
 
+        def varianza(sigma_s):
+            result = []
+
+            for i in sigma_s:
+                if len(result) == 0:
+                    result.append(i)
+                    continue
+                result.append(i + result[-1])
+            return result
+
+        suma1 = varianza(sigma_s)
+
         fig = go.Figure()
-        fig.add_trace(go.Scatter(x=list(range(1, 31)), y=sigma_s, mode="lines+markers"))
+        fig.add_trace(go.Scatter(x=list(range(1, 31)), y=suma1, mode="lines+markers"))
         fig.update_layout(
             title="porciento que representan los valores sigulares",
             xaxis_title="cantidad",
